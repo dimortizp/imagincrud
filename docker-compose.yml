@@ -1,8 +1,8 @@
 version: '2'
 
 services:
-  imagincrud.login:
-    image: imagincrud.login
+  imagincrud:
+    image: imagincrud
     build:
-      context: ./imagincrud.login
+      context: ./imagincrud
       dockerfile: Dockerfile
