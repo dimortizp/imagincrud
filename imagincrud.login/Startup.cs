@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace imagincrud
+namespace imagincrud.login
 {
     public class Startup
     {
@@ -36,7 +37,12 @@ namespace imagincrud
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-
+            app.UseJwtBearerAuthentication( new JwtBearerOptions
+                {
+                    Audience = "http://localhost:5001/", 
+                    Authority = "http://localhost:5000/", 
+                    AutomaticAuthenticate = true
+                });
             app.UseMvc();
         }
     }
